@@ -1,6 +1,6 @@
 <?PHP
 
-class search{
+class video_search{
 
 	var $data;
 	
@@ -12,11 +12,11 @@ class search{
 	
 	public function function_choice(){
 	
-		return "display_search_results";
+		return "display_video_search_results";
 	
 	}
 
-	public function search($site){
+	public function video_search($site){
 	
 		$term = "";
 	
@@ -56,7 +56,8 @@ class search{
 											 length(description) - length(replace(description,:title,'')) +
 											 length(subject) - length(replace(subject,:title,'')) as changed
 											 from link_index 
-											 where title like :inner or subject like :inner or description like :inner
+											 where (title like :inner or subject like :inner or description like :inner)
+											 and (link like'%.mp4%')
 											 order by changed desc LIMIT " . PAGINATION . " " . $extra, 
 											 array(':inner' => "%" . $word . "%", ':title' => $word), 
 											 $site->database_link);

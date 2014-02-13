@@ -22,7 +22,7 @@ class api_search{
 	
 		if(isset($_GET['term'])){
 		
-			$term = filter_var($_GET['term'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+			$term = filter_var($_GET['term'], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH) . " ";
 
 		}
 		

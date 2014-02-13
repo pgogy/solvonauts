@@ -51,8 +51,8 @@
 	
 	}
 	
-	echo self::display_twitter_header($this->site->get_text($title), $description, $license);
+	echo self::display_picture_twitter_header($link, $this->site->get_text($title), $description, $license);
 	
-	echo "<div about='" . $link . "'>" . $output . "</div>";
+	echo "<p><img src='" . $link . "' /></p><div about='" . $link . "'>" . $output . "</div>";
 	
 	echo self::display_footer();

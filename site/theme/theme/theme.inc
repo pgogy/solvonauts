@@ -14,6 +14,14 @@ class theme{
 	
 	}
 	
+	public function display_twitter_header($title, $description, $license){
+	
+	}
+	
+	public function display_picture_twitter_header($link, $title, $description, $license){
+	
+	}
+	
 	private function display_footer(){
 	
 	}
@@ -21,6 +29,12 @@ class theme{
 	public function display_all_metadata_results($data){
 	
 		include __DIR__ . "/all_metadata_results.inc";
+	
+	}
+	
+	public function display_picture_metadata_results($data){
+	
+		include __DIR__ . "/picture_metadata_results.inc";
 	
 	}
 	
@@ -110,7 +124,7 @@ class theme{
 
 		return $this->site->get_text_replace("Searching for %d", array("%d" => utf8_decode($data['term']))) 
 				.  " : " . $this->site->get_text_replace("%d results found", array("%d" => $data['result_count'][0]))
-				. " | <a href='?term=" . $data['term'] . "&action=rss_search'>" . $this->site->get_text("RSS Feed for this search") . "</a>";
+				. " | <a href='?term=" . urlencode($data['term']) . "&action=rss_search'>" . $this->site->get_text("RSS Feed for this search") . "</a>";
 	
 	}
 	
@@ -124,14 +138,78 @@ class theme{
 	
 	}
 	
+	public function display_picture_resources($data){
+	
+		foreach($data['results'] as $resource){
+		
+			$this->display_picture_resource($resource);
+		
+		}
+	
+	}
+	
+	public function display_audio_resources($data){
+	
+		foreach($data['results'] as $resource){
+		
+			$this->display_audio_resource($resource);
+		
+		}
+	
+	}
+	
+	public function display_video_resources($data){
+	
+		foreach($data['results'] as $resource){
+		
+			$this->display_video_resource($resource);
+		
+		}
+	
+	}
+	
+	public function display_picture_resource($resource){
+	
+		?><p>
+			<a class="oerlink" target="_blank" href="<?PHP echo $resource['link']; ?>"><?PHP echo utf8_decode(stripslashes($resource['title'])); ?></a>
+		 </p>
+		 <p>
+			<img src="<?PHP echo $resource['link']; ?>" />
+		 </p><?PHP
+	
+	}
+	
+	public function display_audio_resource($resource){
+	
+		?><p>
+			<a class="oerlink" target="_blank" href="<?PHP echo $resource['link']; ?>"><?PHP echo utf8_decode(stripslashes($resource['title'])); ?></a>
+		 </p>
+		 <p>
+			<audio controls>
+				<source src="<?PHP echo $resource['link']; ?>" type="video/mp3">
+			</audio>
+		 </p><?PHP
+	
+	}
+	
+	public function display_video_resource($resource){
+	
+		?><p>
+			<a class="oerlink" target="_blank" href="<?PHP echo $resource['link']; ?>"><?PHP echo utf8_decode(stripslashes($resource['title'])); ?></a>
+		 </p>
+		 <p>
+			<video controls width="400" height="300">
+				<source src="<?PHP echo $resource['link']; ?>" type="video/mp4">
+			</video>
+		 </p><?PHP
+	
+	}
+	
 	public function display_resource($resource){
 		
 		$resource_data = "";
 		
-		?><p>
-			<a class="oerlink" target="_blank" href="<?PHP echo $resource['link']; ?>"><?PHP echo utf8_decode(stripslashes($resource['title'])); ?></a>
-		 </p>
-		 <div class="item"><div><p><?PHP echo $this->site->get_text("Description"); ?></p><?PHP
+		?><div class="item"><div>888888888888888888888888<p><?PHP echo $this->site->get_text("Description"); ?></p><?PHP
 	
 			echo utf8_decode(stripslashes($resource['description']));
 			
@@ -154,12 +232,13 @@ class theme{
 		?></div><div><p><?PHP echo $this->site->get_text("Site sourced from"); ?></p><?PHP
 			
 			echo "<a href='" . $resource['site_address'] . "'>" . stripslashes($resource['site_address']) . "</a>";
-	
+			
+		
 		?><p><?PHP echo $this->site->get_text("All metadata"); ?></p><?PHP
 		
 			echo "<a href='?action=all_metadata&id=" . $resource['link_id'] . "'>" . $this->site->get_text("See all metadata") . "</a>";
 		
-		?></p></div></div><?PHP
+		?></p></div></div><?PHP	
 
 	}
 	
