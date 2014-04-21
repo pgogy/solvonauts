@@ -53,6 +53,6 @@
 	
 	echo self::display_twitter_header($this->site->get_text($title), $description, $license);
 	
-	echo "<div about='" . $link . "'>" . $output . "</div>";
+	echo "<div itemscope about='" . $link . "'><p><a href='" . $link . "'>Visit this resource</a></p>" . $output . "</div>";
 	
 	echo self::display_footer();

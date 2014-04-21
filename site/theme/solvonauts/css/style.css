@@ -57,3 +57,9 @@ a{
 .header ul li:first-child{
 	border:none;
 }
+
+.attrib_full, .attrib_basic, .attrib_url{
+	cursor:hand;
+	cursor:pointer;
+	text-decoration:underline;
+}

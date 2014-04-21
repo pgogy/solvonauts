@@ -32,8 +32,14 @@ class solvonauts extends theme{
 			<head>
 				<title><?PHP echo $title; ?></title>
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+				<?PHP
+					$this->include_google_analytics();
+				?>
 				<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 				<script type="text/javascript" src="site/theme/solvonauts/js/activity.js"></script>
+				<script type="text/javascript" src="site/theme/solvonauts/js/metadata.js"></script>
+				<script type="text/javascript" src="site/theme/solvonauts/js/jquery.cookie.js"></script>
+				<script type="text/javascript" src="site/theme/solvonauts/js/cookie.js"></script>
 				<link rel="stylesheet" type="text/css" href="site/theme/solvonauts/css/style.css">	
 			</head>
 			<body>
@@ -54,6 +60,9 @@ class solvonauts extends theme{
 			<head>
 				<title><?PHP echo $title; ?></title>
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+				<?PHP
+					$this->include_google_analytics();
+				?>
 				<meta name="twitter:card" content="summary">
 				<meta name="twitter:site" content="@solvonauts">
 				<meta name="twitter:title" content="<?PHP echo $title; ?>">
@@ -80,11 +89,14 @@ class solvonauts extends theme{
 			<head>
 				<title><?PHP echo $title; ?></title>
 				<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-				<meta name="twitter:card" content="summary">
+				<?PHP
+					$this->include_google_analytics();
+				?>
+				<meta name="twitter:card" content="summary_large_image">
 				<meta name="twitter:site" content="@solvonauts">
 				<meta name="twitter:title" content="<?PHP echo $title; ?>">
 				<meta name="twitter:description" content="<?PHP echo substr($license . " " . $description, 0, 200); ?>">
-				<meta name="twitter:image" content="<?PHP echo $link; ?>">
+				<meta name="twitter:image:src" content="<?PHP echo $link; ?>">
 				<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 				<script type="text/javascript" src="site/theme/solvonauts/js/activity.js"></script>
 				<link rel="stylesheet" type="text/css" href="site/theme/solvonauts/css/style.css">	
@@ -190,11 +202,17 @@ class solvonauts extends theme{
 
 		$this->display_all_metadata($resource);
 		
+		?><p><?PHP echo $this->site->get_text("Attribution"); ?></p><?PHP
+		
+			echo "<a link_id='" . $resource['link_id'] ."' class='attrib_full'>" . $this->site->get_text("Click to get HTML") . "</a> | 
+			<a link_id='" . $resource['link_id'] ."' class='attrib_basic'>" . $this->site->get_text("Click to get attribution") . "</a> |
+			<a link_id='" . $resource['link_id'] ."' class='attrib_url'>" . $this->site->get_text("Click to get URL") . "</a>";
+		
 		?><p><?PHP echo $this->site->get_text("All metadata"); ?></p><?PHP
 		
 			echo "<a href='?action=all_metadata&id=" . $resource['link_id'] . "'>" . $this->site->get_text("See all metadata") . "</a>";
 		
-		?></p></div></div><?PHP
+		?></div></div><?PHP
 
 	}
 	
@@ -285,7 +303,7 @@ class solvonauts extends theme{
 			
 			echo substr($resource_data,0,strlen($resource_data)-3);
 		
-		?></div><div><p><?PHP echo $this->site->get_text("license"); ?></p><?PHP
+		?></div><div><p><?PHP echo $this->site->get_text("License"); ?></p><?PHP
 		
 			echo utf8_decode(stripslashes($resource['license']));
 		
