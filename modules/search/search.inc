@@ -50,7 +50,7 @@ class search{
 		
 		}
 		
-		$word = str_replace(" ","?",$word);
+		$search_word = str_replace(" ","_",$word);
 		
 		$statement = $site->db_layer->select_query_multiple("select SQL_CALC_FOUND_ROWS title, link_id, title, link, description, subject, license, site_address, length(title) - length(replace(title,:title,'')) +
 											 length(description) - length(replace(description,:title,'')) +
@@ -58,7 +58,7 @@ class search{
 											 from link_index 
 											 where title like :inner or subject like :inner or description like :inner
 											 order by changed desc LIMIT " . PAGINATION . " " . $extra, 
-											 array(':inner' => "%" . $word . "%", ':title' => $word), 
+											 array(':inner' => "%" . $search_word . "%", ':title' => $word), 
 											 $site->database_link);
 											 
 		$statement_rows = $site->db_layer->select_query("SELECT FOUND_ROWS();", 
