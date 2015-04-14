@@ -5,7 +5,7 @@ class solvonauts extends theme{
 	var $site;
 
 	public function solvonauts($site){
-	
+
 		$this->site = $site;
 	
 	}
@@ -27,7 +27,7 @@ class solvonauts extends theme{
 	}
 	
 	public function display_header($title){
-		
+
 		?><html>
 			<head>
 				<title><?PHP echo $title; ?></title>

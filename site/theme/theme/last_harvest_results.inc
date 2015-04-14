@@ -6,7 +6,6 @@
 	<body>
 	<div class="header">	
 	</div>
-	<p><?PHP echo $this->display_results_count($data); ?></p>
 	<?PHP $this->display_resources($data); ?>
 	</body>
 </html>

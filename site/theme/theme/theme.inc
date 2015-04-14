@@ -9,9 +9,20 @@ class theme{
 		$this->site = $site;
 	
 	}
-	
-	private function display_header($title){
-	
+
+	public function include_google_analytics(){
+
+		?><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-45552163-1', 'solvonauts.org');
+  ga('send', 'pageview');
+
+</script><?PHP
+
 	}
 	
 	public function display_twitter_header($title, $description, $license){
@@ -23,6 +34,36 @@ class theme{
 	}
 	
 	private function display_footer(){
+	
+	}
+
+	public function display_latest_items($data){
+
+		$sites = array();
+
+		foreach($data['results'] as $site){
+			if(strpos($site['site_address'], "http")!==FALSE){
+				if(strpos($site['site_address'], "flickr")==FALSE && strpos($site['site_address'], "youtube")==FALSE && strpos($site['site_address'], "feedburner")==FALSE){
+					$site_link = explode("/", $site['site_address']);
+					if(!isset($sites[$site_link[2]])){
+						$sites[$site_link[2]] = $site['last_update'];
+					}else{
+						$sites[$site_link[2]] = max($site['last_update'], $sites[$site[2]]);
+
+					}
+				}
+			}
+		}	
+
+		arsort($sites);
+
+		include __DIR__ . "/latest_items.inc";
+	
+	}
+
+	public function display_last_harvest_results($data){
+	
+		include __DIR__ . "/last_harvest_results.inc";
 	
 	}
 	
@@ -209,7 +250,7 @@ class theme{
 		
 		$resource_data = "";
 		
-		?><div class="item"><div>888888888888888888888888<p><?PHP echo $this->site->get_text("Description"); ?></p><?PHP
+		?><div class="item"><div><p><?PHP echo $this->site->get_text("Description"); ?></p><?PHP
 	
 			echo utf8_decode(stripslashes($resource['description']));
 			

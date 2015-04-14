@@ -5,8 +5,8 @@
 	$link = "";
 	
 	$title = "All metadata";
-	$description = "Description not set";
-	$license = "License not set";
+	$description = "";
+	$license = "No known restrictions";
 
 	foreach($data['results'] as $item){
 	
