@@ -38,7 +38,7 @@ class flickr_search{
 
 		
 
-		if(!isset($_POST['flickr_term'])){
+		if(!isset($_GET['flickr_term'])){
 
 			?><p>
 
@@ -46,15 +46,16 @@ class flickr_search{
 
 			</p>
 
-			<form enctype="multipart/form-data" action="" method="POST">
+			<form enctype="multipart/form-data" action="?action=flickr_search" method="GET">
 
 				<p><input type="text" value="<?PHP echo $this->site->get_text("Enter Search Term here"); ?>" size="85" name="flickr_term" /></p>
+				<input type="hidden" name="action" value="flickr_search" />
 				<p>License
 				<select name="license">
 				<option value="1">Attribution-NonCommercial-ShareAlike License http://creativecommons.org/licenses/by-nc-sa/2.0/</option>
 <option value="2">Attribution-NonCommercial License http://creativecommons.org/licenses/by-nc/2.0/</option>
 <option value="3">Attribution-NonCommercial-NoDerivs License http://creativecommons.org/licenses/by-nc-nd/2.0/</option>
-<option value="4">Attribution License" http://creativecommons.org/licenses/by/2.0/</option>
+<option value="4">Attribution License http://creativecommons.org/licenses/by/2.0/</option>
 <option value="5">Attribution-ShareAlike License http://creativecommons.org/licenses/by-sa/2.0/</option>
 <option value="6">Attribution-NoDerivs License http://creativecommons.org/licenses/by-nd/2.0/</option>
 <option value="7">No known copyright restrictions http://flickr.com/commons/usage/</option>
@@ -69,21 +70,21 @@ class flickr_search{
 
 		}else{
 
-			if(isset($_POST['page'])){
-				$page = $_POST['page'];
+			if(isset($_GET['page'])){
+				$page = $_GET['page'];
 			}else{
 				$page = 1;
 			}
 
 			$params = array(
 
-				'api_key'	=> 'API KEY HERE',
+				'api_key'	=> 'f642fd9921531963fcb994c1182b97a6',
 
 				'method'	=> 'flickr.photos.search',
 
-				'text'	=> $_POST['flickr_term'],
+				'text'	=> $_GET['flickr_term'],
 
-				'license'	=> $_POST['license'],
+				'license'	=> $_GET['license'],
 
 				'page'	=> $page,
 
@@ -113,19 +114,24 @@ class flickr_search{
 
 				$data = $rsp_obj['photos'];
 
-				?><p><?echo $data['perpage'] * $data['pages'] . " " . $this->site->get_text("photos found"); ?></p><?PHP
+				?><p><?echo $data['total'] . " " . $this->site->get_text("photos found"); ?></p><?PHP
 
-				?><form action="" method="POST"><p><?PHP echo $this->site->get_text("Select a page"); ?> <select name="page"><?PHP
+				if($data['pages']!=1){
 
-				for($x=1;$x!=$data['pages'];$x++){
+				?><form action="?action=flickr_search" method="GET"><p><?PHP echo $this->site->get_text("Select a page"); ?> <select name="page"><?PHP
+
+				for($x=1;$x<=$data['pages'];$x++){
 					?><option <?PHP if($page == $x){ echo " selected "; } ?> value="<?PHP echo $x; ?>"><?PHP echo $this->site->get_text("Page") . " " . $x; ?></option><?PHP
 				}
 
 				?></select>
-				<input name="flickr_term" type="hidden" value="<?PHP echo $_POST['flickr_term']; ?>" />
-				<input name="license" type="hidden" value="<?PHP echo $_POST['license']; ?>" />
+				<input type="hidden" name="action" value="flickr_search" />
+				<input name="flickr_term" type="hidden" value="<?PHP echo $_GET['flickr_term']; ?>" />
+				<input name="license" type="hidden" value="<?PHP echo $_GET['license']; ?>" />
 				<input type="submit" value="<?PHP echo $this->site->get_text("Change page"); ?>" />
 				</p></form><?PHP
+
+				}
 
 				foreach($data['photo'] as $photo){
 					?><div style="display:inline-block; width:80px; text-align:center;" ><img src="https://farm<?PHP echo $photo['farm']; ?>.staticflickr.com/<?PHP echo $photo['server']; ?>/<?PHP echo $photo['id']; ?>_<?PHP echo $photo['secret']; ?>_s.jpg" /><form target="_blank" method="POST" action="?action=flickr_attribute"><input type="hidden" name="flickr_url" value="https://www.flickr.com/photos/<?PHP echo $photo['owner']; ?>/<?PHP echo $photo['id']; ?>/" /><input type="submit" value="Attribute" /></form></div><?PHP
