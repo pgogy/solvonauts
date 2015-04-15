@@ -56,6 +56,7 @@
 			<a href="?search=picture_search"><?PHP echo $this->site->get_text("Picture search"); ?></a> |
 			<a href="?search=video_search"><?PHP echo $this->site->get_text("Video search"); ?></a> |
 			<a href="?search=audio_search"><?PHP echo $this->site->get_text("Audio search"); ?></a> |
+			<a href="?action=flickr_search"><?PHP echo $this->site->get_text("Flickr Search"); ?></a> |
 			<a href="?action=flickr_attribute"><?PHP echo $this->site->get_text("Flickr Attribute"); ?></a> |
 			<a href="?action=visit_activity_display"><?PHP echo $this->site->get_text("Frequently visited resources"); ?></a> |
 			<a href="?action=search_activity_display"><?PHP echo $this->site->get_text("Recent searches"); ?></a> | 
