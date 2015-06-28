@@ -190,7 +190,17 @@ class flickr_attribute{
 
 			imagettftext($im, 10.0, 0, $license_details[0] + 10, $image_height + 30, imagecolorallocate($im,255,255,255), dirname(__FILE__) . "/arial.ttf" , $title . " " . $author );	
 
-					
+			?>
+			<p><?PHP echo $this->site->get_text("Attribute Another"); ?></p>
+			<form enctype="multipart/form-data" action="" method="POST">
+
+				<input type="hidden" name="MAX_FILE_SIZE" size="1000000" />
+
+				<input type="text" value="<?PHP echo $this->site->get_text("Enter URL here"); ?>" size="35" name="flickr_url" />
+
+				<input type="submit" value="<?PHP echo $this->site->get_text("Get Picture"); ?>" class="button" />
+
+			</form><?PHP		
 
 			ob_start();
 
