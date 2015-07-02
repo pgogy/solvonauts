@@ -28,8 +28,8 @@ class random_oer{
 					<link><?PHP echo SITE . urlencode("?action=random_oer"); ?></link>
 					<description><?PHP echo $this->site->get_text("A Random OER from Solvonauts"); ?></description>
 					<item>
-							<title><![CDATA[<?PHP echo $this->data['results'][0]['title']; ?>]]></title>
-							<description><![CDATA[<?PHP echo utf8_decode(strip_tags($this->data['results'][0]['description'])); ?>]]></description>
+							<title><![CDATA[<?PHP echo substr(strip_tags(stripslashes(utf8_decode($this->data['results'][0]['title'])) . " : " . strip_tags(utf8_decode($this->data['results'][0]['description']))), 0, 100); ?>...]]></title>
+							<description><![CDATA[<?PHP echo substr(strip_tags(utf8_decode($this->data['results'][0]['description'])), 0, 100); ?>]]></description>
 							<link><![CDATA[<?PHP echo SITE . "?action=all_metadata&id=" . $this->data['results'][0]['link_id']; ?>]]></link>
 							<guid><![CDATA[<?PHP echo SITE . "?action=all_metadata&id=" . $this->data['results'][0]['link_id']; ?>]]></guid>
 					</item>
