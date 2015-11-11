@@ -191,6 +191,18 @@ class solvonauts extends theme{
 		</form>';
 	
 	}
+
+	public function form_display_parameter($data, $action){
+	
+		return '<form action="" method="GET">
+			<input type="text" name="term" value="' . utf8_decode($data['term']) . '"/>
+			<input type="hidden" name="action" value="' . $action . '"/>
+			<button>
+				' . $this->site->get_text("Search again") . '
+			</button>
+		</form>';
+	
+	}
 	
 	public function display_resource($resource){
 		

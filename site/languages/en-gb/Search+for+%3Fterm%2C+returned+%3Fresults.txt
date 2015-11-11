@@ -1,1 +1,0 @@
-Search for ?term, returned ?results

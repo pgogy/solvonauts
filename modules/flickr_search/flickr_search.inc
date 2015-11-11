@@ -126,7 +126,7 @@ class flickr_search{
 
 				?></select>
 				<input type="hidden" name="action" value="flickr_search" />
-				<input name="flickr_term" type="hidden" value="<?PHP echo $_GET['flickr_term']; ?>" />
+				<input name="flickr_term" type="text" value="<?PHP echo $_GET['flickr_term']; ?>" />
 				<input name="license" type="hidden" value="<?PHP echo $_GET['license']; ?>" />
 				<input type="submit" value="<?PHP echo $this->site->get_text("Change page"); ?>" />
 				</p></form><?PHP
@@ -134,7 +134,7 @@ class flickr_search{
 				}
 
 				foreach($data['photo'] as $photo){
-					?><div style="display:inline-block; width:80px; text-align:center;" ><img src="https://farm<?PHP echo $photo['farm']; ?>.staticflickr.com/<?PHP echo $photo['server']; ?>/<?PHP echo $photo['id']; ?>_<?PHP echo $photo['secret']; ?>_s.jpg" /><form target="_blank" method="POST" action="?action=flickr_attribute"><input type="hidden" name="flickr_url" value="https://www.flickr.com/photos/<?PHP echo $photo['owner']; ?>/<?PHP echo $photo['id']; ?>/" /><input type="submit" value="Attribute" /></form></div><?PHP
+					?><div style="display:inline-block; width:250px; text-align:center;" ><a target="_blank" href="https://www.flickr.com/photos/<?php echo $photo['owner']; ?>/<?PHP echo $photo['id']; ?>"><img src="https://farm<?PHP echo $photo['farm']; ?>.staticflickr.com/<?PHP echo $photo['server']; ?>/<?PHP echo $photo['id']; ?>_<?PHP echo $photo['secret']; ?>_m.jpg" /></a><form target="_blank" method="POST" action="?action=flickr_attribute"><input type="hidden" name="flickr_url" value="https://www.flickr.com/photos/<?PHP echo $photo['owner']; ?>/<?PHP echo $photo['id']; ?>/" /><input type="submit" value="Attribute" /></form></div><?PHP
 				}
 
 			}

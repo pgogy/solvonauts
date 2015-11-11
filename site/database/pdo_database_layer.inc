@@ -64,6 +64,12 @@ class pdo_database_layer extends database_layer{
 		return $statement->fetchAll();
 	
 	}
+
+	public function get_count($statement){
+	
+		return $statement->rowCount();
+	
+	}
 	
 	public function get_row($statement){
 	

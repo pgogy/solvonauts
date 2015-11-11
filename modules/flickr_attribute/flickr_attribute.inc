@@ -90,7 +90,7 @@ class flickr_attribute{
 
 			$params = array(
 
-				'api_key'	=> 'API KEY HERE',
+				'api_key'	=> 'f642fd9921531963fcb994c1182b97a6',
 
 				'method'	=> 'flickr.photos.getInfo',
 
@@ -154,26 +154,36 @@ class flickr_attribute{
 
 			$title = $pic['title']['_content'];
 
-			$filepath = "http://farm" . $pic['farm'] . ".static.flickr.com/" . $pic['server'] . "/" . $pic['id'] . "_" . $pic['secret'] . "_b.jpg";
+			$filepath = "http://farm" . $pic['farm'] . ".static.flickr.com/" . $pic['server'] . "/" . $pic['id'] . "_" . $pic['secret'] . "_o.jpg";
 
 			$mime = "jpeg";
 
-			
-
 			$details = getimagesize($filepath);
 
-			$original = imagecreatefromjpeg($filepath);
+			$original = @imagecreatefromjpeg($filepath);
+
+			$fontsize = 10.0;
+
+			if(!$original){
+
+				$filepath = "http://farm" . $pic['farm'] . ".static.flickr.com/" . $pic['server'] . "/" . $pic['id'] . "_" . $pic['secret'] . "_c.jpg";
+
+				$mime = "jpeg";
+
+				$details = getimagesize($filepath);
+
+				$original = @imagecreatefromjpeg($filepath);
+
+				$fontsize = 7.0;
+			
+			}
 
 			$image_height = $details[1] + 5;
-
-			
 
 			$im = imagecreatetruecolor($details[0],$details[1]+40);
 
 			imagecopyresampled($im, $original, 0,0, 0, 0, $details[0], $details[1] , $details[0], $details[1]);
-
 			
-
 			if($license!="PUBLIC DOMAIN"){
 
 				$original = imagecreatefrompng(dirname(__FILE__) . "/" . $license);
@@ -186,9 +196,9 @@ class flickr_attribute{
 
 
 
-			imagettftext($im, 10.0, 0, $license_details[0] + 10, $image_height + 10, imagecolorallocate($im,255,255,255), dirname(__FILE__) . "/arial.ttf" , str_replace(".png", "", str_replace("images/", "", $license)) . " " . $picture_url );
+			imagettftext($im, $fontsize, 0, $license_details[0] + 10, $image_height + 10, imagecolorallocate($im,255,255,255), dirname(__FILE__) . "/arial.ttf" , str_replace(".png", "", str_replace("images/", "", $license)) . " " . $picture_url );
 
-			imagettftext($im, 10.0, 0, $license_details[0] + 10, $image_height + 30, imagecolorallocate($im,255,255,255), dirname(__FILE__) . "/arial.ttf" , $title . " " . $author );	
+			imagettftext($im, $fontsize, 0, $license_details[0] + 10, $image_height + 30, imagecolorallocate($im,255,255,255), dirname(__FILE__) . "/arial.ttf" , $title . " " . $author );	
 
 			?>
 			<p><?PHP echo $this->site->get_text("Attribute Another"); ?></p>

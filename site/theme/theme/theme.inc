@@ -119,6 +119,12 @@ class theme{
 		return $data[0];
 		
 	}
+
+	public function display_count($data){
+
+		include __DIR__ . "/site_count.inc";
+		
+	}
 	
 	public function display_total_sites(){
 	
