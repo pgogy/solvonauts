@@ -272,16 +272,22 @@
 			
 			$name = str_replace("collections|","",str_replace("/","|",str_replace("https://sketchfab.com/","",$url)));
 
+			if($this->counter!==0){
+
+				$this->url_list_show();
+
+			}
+
 			$this->database->update_query("update oer_site_list set items_harvested = :items_harvested where site_address = :site_address and url_type=:type",
 													array(
 														":items_harvested" => $this->counter,
 														":site_address" => $name,
-
-	":type" => "SKETCHFAB_COLLECTION"
+														":type" => "SKETCHFAB_COLLECTION"
 														)
 													, $this->link);
 
 			echo "SKETCHFAB COLLECTION " . $url . " " . $this->counter . "\n";
+			echo "404 check " . $this->url_count . "\n";
 
 		}
 

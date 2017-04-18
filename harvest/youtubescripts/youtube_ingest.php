@@ -192,7 +192,7 @@
 
 			  $this->address = "http://www.youtube.com/user/" . $name;
 
-			  $DEVELOPER_KEY = 'AIzaSyDimTdTXAWLNIRD3e7zIU665k2RYYM1y1o';
+			  $DEVELOPER_KEY = 'ADD DEVELOPER KEY HERE';
 
 			  $client = new Google_Client();
 			  $client->setDeveloperKey($DEVELOPER_KEY);
@@ -234,6 +234,12 @@
 				  
 			  }
 			  
+			  if($this->counter!==0){
+
+					$this->url_list_show();
+
+				}
+			  
 			  $this->database->insert_query("update oer_site_list set items_harvested = :items_harvested 
 													where site_address = :site_address and url_type=:type",
 													array(
@@ -244,7 +250,7 @@
 													, $this->link);
 	
 			echo "YOUTUBE " . $name . " " . $this->counter . "\n";
-			
+			echo "404 check " . $this->url_count . "\n";
 	
 		}
 

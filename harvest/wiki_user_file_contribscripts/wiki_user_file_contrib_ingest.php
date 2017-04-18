@@ -202,18 +202,24 @@
 				}
 			
 			}
+			
+			if($this->counter!==0){
+
+				$this->url_list_show();
+
+			}
 
 			$this->database->insert_query("update oer_site_list set items_harvested = :items_harvested 
 													where site_address = :site_address and url_type=:type",
 													array(
 														":items_harvested" => $this->counter,
 														":site_address" => $url,
-
-	":type" => "WIKI_USER_FILE_CONTRIB"
+														":type" => "WIKI_USER_FILE_CONTRIB"
 														)
 													, $this->link);
 
 			echo "WIKI USER FILE CONTRIBS " . $url . " " . $this->counter . "\n";
+			echo "404 check " . $this->url_count . "\n";
 
 		}
 

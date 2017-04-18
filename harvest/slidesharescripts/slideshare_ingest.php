@@ -189,8 +189,8 @@
 		
 			$this->name = $name;
 			
-			$api_key = "ZQJlKGAA";
-			$secret = "q6rDaQGC";
+			$api_key = "ADD API KEY HERE";
+			$secret = "ADD SECRET HERE";
 			
 			$ts=time();
             $hash=sha1($secret.$ts);
@@ -220,17 +220,23 @@
 			
 			}
 			
+			if($this->counter!==0){
+
+				$this->url_list_show();
+
+			}
+			
 			$this->database->insert_query("update oer_site_list set items_harvested = :items_harvested 
 													where site_address = :site_address and url_type=:type",
 													array(
 														":items_harvested" => $this->counter,
-
-":type" => "SLIDESHARE",
+														":type" => "SLIDESHARE",
 														":site_address" => $name
 														)
 													, $this->link);
 
 			echo "SLIDESHARE " . $name . " " . $this->counter . "\n";
+			echo "404 check " . $this->url_count . "\n";
 			
 		}
 			

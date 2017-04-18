@@ -574,8 +574,15 @@
 				$this->get_url($this->default_url, $url, $site_licence);
 
 			}else{
+			
+				if($this->counter!==0){
 
-				echo "OAI " . $url . " " . $this->counter . "\n";			
+					$this->url_list_show();
+
+				}
+
+				echo "OAI " . $url . " " . $this->counter . "\n";
+				echo "404 check " . $this->url_count . "\n";			
 
 			}
 

@@ -238,17 +238,23 @@
 			$this->url_process($data);
 
 			$parts = explode("=",$url);
+			
+			if($this->counter!==0){
+
+				$this->url_list_show();
+
+			}
 
 			$this->database->update_query("update oer_site_list set items_harvested = :items_harvested where site_address = :site_address and url_type=:type",
 													array(
 														":items_harvested" => $this->counter,
 														":site_address" => $parts[1],
-
-	":type" => "TES"
+														":type" => "TES"
 														)
 													, $this->link);
 
 			echo "TES " . $url . " " . $this->counter . "\n";
+			echo "404 check " . $this->url_count . "\n";
 
 		}
 
